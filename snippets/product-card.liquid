@@ -1,9 +1,7 @@
-{%- liquid
-  comment
-    Renders a product card.
-    Usage: {% render 'product-card', card_product: product, index: forloop.index0 %}
-  endcomment
--%}
+{%- comment -%}
+  Renders a product card.
+  Usage: render 'product-card', card_product: product, index: forloop.index0
+{%- endcomment -%}
 {%- if card_product and card_product != empty -%}
   {%- liquid
     assign on_sale = false

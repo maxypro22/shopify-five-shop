@@ -1,9 +1,7 @@
-{%- liquid
-  comment
-    Renders pagination controls.
-    Usage: {% render 'pagination', paginate: paginate %}
-  endcomment
--%}
+{%- comment -%}
+  Renders pagination controls.
+  Usage: render 'pagination', paginate: paginate
+{%- endcomment -%}
 {%- if paginate.pages > 1 -%}
   <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
     {%- if paginate.previous -%}

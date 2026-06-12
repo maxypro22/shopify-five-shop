@@ -1,9 +1,7 @@
-{%- liquid
-  comment
-    Renders an inline SVG icon.
-    Usage: {% render 'icon', icon: 'cart', class: 'icon--dir' %}
-  endcomment
--%}
+{%- comment -%}
+  Renders an inline SVG icon.
+  Usage: render 'icon', icon: 'cart', class: 'icon--dir'
+{%- endcomment -%}
 {%- case icon -%}
 {%- when 'cart' -%}
 <svg class="icon {{ class }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.3 7h11.4l1.2 12.2a1.5 1.5 0 0 1-1.5 1.8H6.6a1.5 1.5 0 0 1-1.5-1.8L6.3 7Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
