@@ -1,0 +1,19 @@
+<div class="page-hero">
+  <div class="page-width">
+    <span class="section-header__eyebrow" style="justify-content: center;">{{ shop.name }}</span>
+    <h1 class="reveal">{{ page.title | escape }}</h1>
+  </div>
+</div>
+
+<div class="page-width">
+  <article class="page-content rte reveal">
+    {{ page.content }}
+  </article>
+</div>
+
+{% schema %}
+{
+  "name": "Page",
+  "settings": []
+}
+{% endschema %}

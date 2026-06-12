@@ -1,0 +1,116 @@
+<section class="hero">
+  <div class="hero__blob hero__blob--1"></div>
+  <div class="hero__blob hero__blob--2"></div>
+  <div class="page-width hero__inner">
+    <div class="hero__content reveal">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="hero__eyebrow">
+          {% render 'icon', icon: 'sparkle' %}
+          {{ section.settings.eyebrow | escape }}
+        </span>
+      {%- endif -%}
+      <h1 class="h0 hero__title">{{ section.settings.heading }}</h1>
+      {%- if section.settings.text != blank -%}
+        <p class="hero__text">{{ section.settings.text | escape }}</p>
+      {%- endif -%}
+      <div class="hero__actions">
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="btn btn--primary">
+            {{ section.settings.button_label | escape }}
+            {% render 'icon', icon: 'arrow-right' %}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.button_label_2 != blank -%}
+          <a href="{{ section.settings.button_link_2 | default: routes.collections_url }}" class="btn btn--secondary">
+            {{ section.settings.button_label_2 | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="hero__stats">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'stat' -%}
+              <div class="hero__stat" {{ block.shopify_attributes }}>
+                <div class="hero__stat-number">{{ block.settings.number | escape }}</div>
+                <div class="hero__stat-label">{{ block.settings.label | escape }}</div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="hero__media reveal" style="--reveal-delay: 0.15s">
+      <div class="hero__media-main">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1100 | image_tag: widths: '550, 800, 1100', sizes: '(min-width: 990px) 45vw, 100vw', alt: section.settings.image.alt | default: shop.name, preload: true }}
+        {%- else -%}
+          <div class="hero__media-placeholder">
+            {{ 'lifestyle-1' | placeholder_svg_tag }}
+          </div>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.card_1_title != blank -%}
+        <div class="hero__card hero__card--1">
+          {% render 'icon', icon: 'truck' %}
+          <div>
+            <div class="hero__card-title">{{ section.settings.card_1_title | escape }}</div>
+            <div class="hero__card-sub">{{ section.settings.card_1_text | escape }}</div>
+          </div>
+        </div>
+      {%- endif -%}
+      {%- if section.settings.card_2_title != blank -%}
+        <div class="hero__card hero__card--2">
+          {% render 'icon', icon: 'fire' %}
+          <div>
+            <div class="hero__card-title">{{ section.settings.card_2_title | escape }}</div>
+            <div class="hero__card-sub">{{ section.settings.card_2_text | escape }}</div>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New season · New drops" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Style that <em>speaks</em> for you" },
+    { "type": "text", "id": "text", "label": "Text", "default": "Discover premium fashion, inspired fragrances, watches and more — curated for Qatar and delivered to your door." },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "button_label", "label": "Primary button label", "default": "Shop now" },
+    { "type": "url", "id": "button_link", "label": "Primary button link" },
+    { "type": "text", "id": "button_label_2", "label": "Secondary button label", "default": "Browse categories" },
+    { "type": "url", "id": "button_link_2", "label": "Secondary button link" },
+    { "type": "header", "content": "Floating cards" },
+    { "type": "text", "id": "card_1_title", "label": "Card 1 title", "default": "Fast delivery" },
+    { "type": "text", "id": "card_1_text", "label": "Card 1 text", "default": "All over Qatar" },
+    { "type": "text", "id": "card_2_title", "label": "Card 2 title", "default": "Price Smash" },
+    { "type": "text", "id": "card_2_text", "label": "Card 2 text", "default": "Up to 50% off" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "limit": 3,
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "10k+" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Happy customers" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "10k+", "label": "Happy customers" } },
+        { "type": "stat", "settings": { "number": "14", "label": "Categories" } },
+        { "type": "stat", "settings": { "number": "4.9★", "label": "Average rating" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

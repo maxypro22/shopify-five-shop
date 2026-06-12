@@ -1,0 +1,32 @@
+<section class="related-products section-spacing">
+  <div class="page-width">
+    <div data-related-products
+      data-product-id="{{ product.id }}"
+      data-section-id="{{ section.id }}"
+      data-limit="{{ section.settings.limit }}">
+      {%- if recommendations.performed and recommendations.products_count > 0 -%}
+        <div class="section-header">
+          <div>
+            <span class="section-header__eyebrow">{{ 'products.recommendations.eyebrow' | t }}</span>
+            <h2>{{ section.settings.heading | escape }}</h2>
+          </div>
+        </div>
+        <div class="product-grid" style="--grid-cols: 4">
+          {%- for rec in recommendations.products -%}
+            {% render 'product-card', card_product: rec, index: forloop.index0 %}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Related products",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "You may also like" },
+    { "type": "range", "id": "limit", "min": 2, "max": 8, "step": 1, "label": "Number of products", "default": 4 }
+  ]
+}
+{% endschema %}

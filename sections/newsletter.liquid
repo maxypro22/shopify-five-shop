@@ -1,0 +1,37 @@
+<section class="section-spacing">
+  <div class="page-width">
+    <div class="newsletter-section reveal">
+      <span class="section-header__eyebrow" style="justify-content: center; color: #c4b5fd;">{{ section.settings.eyebrow | escape }}</span>
+      <h2 class="newsletter-section__title">{{ section.settings.heading | escape }}</h2>
+      <p class="newsletter-section__text">{{ section.settings.text | escape }}</p>
+      {%- form 'customer' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        {%- if form.posted_successfully? -%}
+          <p class="form-status form-status--success" style="max-width: 48rem; margin-inline: auto;">{{ 'newsletter.success' | t }}</p>
+        {%- else -%}
+          {%- if form.errors -%}
+            <p class="form-status form-status--error" style="max-width: 48rem; margin-inline: auto;">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+          {%- endif -%}
+          <div class="newsletter-form">
+            <input type="email" name="contact[email]" required placeholder="{{ 'newsletter.placeholder' | t }}" aria-label="{{ 'newsletter.placeholder' | t }}" autocomplete="email">
+            <button type="submit" class="btn btn--primary btn--sm">{{ 'newsletter.submit' | t }}</button>
+          </div>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Newsletter" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Get 10% off your first order" },
+    { "type": "text", "id": "text", "label": "Text", "default": "Join the Shop Five list for early access to drops, exclusive deals and members-only Price Smash alerts." }
+  ],
+  "presets": [
+    { "name": "Newsletter" }
+  ]
+}
+{% endschema %}

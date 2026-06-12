@@ -1,0 +1,129 @@
+<!doctype html>
+{%- liquid
+  assign locale_root = request.locale.iso_code | split: '-' | first
+  assign rtl_locales = 'ar,fa,he,ur,ps,ku,dv'
+  assign is_rtl = false
+  if rtl_locales contains locale_root
+    assign is_rtl = true
+  endif
+-%}
+<html lang="{{ request.locale.iso_code }}" dir="{% if is_rtl %}rtl{% else %}ltr{% endif %}" data-theme="{{ settings.default_color_mode | default: 'light' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#4f46e5">
+
+    {%- assign joined_tags = current_tags | join: ', ' -%}
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: joined_tags }}{% endif -%}
+      {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 64, height: 64 }}">
+    {%- else -%}
+      <link rel="icon" type="image/png" href="{{ 'logo.png' | asset_url }}">
+    {%- endif -%}
+
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    {%- comment -%} Apply saved color mode before first paint to avoid flashing {%- endcomment -%}
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('shopfive:color-mode');
+          if (saved === 'light' || saved === 'dark') {
+            document.documentElement.dataset.theme = saved;
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    {% style %}
+      :root {
+        --color-accent: {{ settings.color_accent | default: '#4f46e5' }};
+        --color-accent-rgb: {{ settings.color_accent | default: '#4f46e5' | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+        --color-accent-hover: {{ settings.color_accent | default: '#4f46e5' | color_darken: 8 }};
+        --page-width: 1280px;
+        --logo-width: {{ settings.logo_width | default: 130 }}px;
+        --font-body: 'Plus Jakarta Sans', 'Tajawal', system-ui, -apple-system, 'Segoe UI', sans-serif;
+        --font-heading: 'Plus Jakarta Sans', 'Tajawal', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      }
+      html[dir='rtl'] {
+        --font-body: 'Tajawal', 'Plus Jakarta Sans', system-ui, sans-serif;
+        --font-heading: 'Tajawal', 'Plus Jakarta Sans', system-ui, sans-serif;
+      }
+    {% endstyle %}
+
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'sections.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+
+    {{ content_for_header }}
+  </head>
+
+  <body class="template-{{ template.name | handle }}{% unless settings.enable_animations %} no-animations{% endunless %}">
+    <a class="skip-to-content visually-hidden-focusable" href="#MainContent">
+      {{ 'general.accessibility.skip_to_content' | t }}
+    </a>
+
+    {% section 'announcement-ticker' %}
+    {% section 'header' %}
+
+    <main id="MainContent" class="main-content" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+    {% section 'cart-drawer' %}
+
+    <button type="button" class="back-to-top" data-back-to-top aria-label="{{ 'general.accessibility.back_to_top' | t }}">
+      {% render 'icon', icon: 'arrow-up' %}
+    </button>
+
+    <div class="page-overlay" data-page-overlay hidden></div>
+
+    <ul hidden>
+      <li id="a11y-refresh-page-message">{{ 'general.accessibility.refresh_page' | t }}</li>
+    </ul>
+
+    <script>
+      window.shopFive = {
+        routes: {
+          cart: {{ routes.cart_url | json }},
+          cartAdd: {{ routes.cart_add_url | json }},
+          cartChange: {{ routes.cart_change_url | json }},
+          cartUpdate: {{ routes.cart_update_url | json }},
+          search: {{ routes.search_url | json }},
+          predictiveSearch: {{ routes.predictive_search_url | json }}
+        },
+        strings: {
+          addToCart: {{ 'products.product.add_to_cart' | t | json }},
+          soldOut: {{ 'products.product.sold_out' | t | json }},
+          unavailable: {{ 'products.product.unavailable' | t | json }},
+          adding: {{ 'products.product.adding' | t | json }},
+          added: {{ 'products.product.added' | t | json }},
+          cartError: {{ 'cart.general.error' | t | json }},
+          days: {{ 'general.countdown.days' | t | json }},
+          hours: {{ 'general.countdown.hours' | t | json }},
+          minutes: {{ 'general.countdown.minutes' | t | json }},
+          seconds: {{ 'general.countdown.seconds' | t | json }}
+        },
+        moneyFormat: {{ shop.money_format | json }},
+        rtl: {% if is_rtl %}true{% else %}false{% endif %}
+      };
+    </script>
+  </body>
+</html>

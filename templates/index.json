@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "blocks": {
+        "stat1": { "type": "stat", "settings": { "number": "10k+", "label": "Happy customers" } },
+        "stat2": { "type": "stat", "settings": { "number": "14", "label": "Categories" } },
+        "stat3": { "type": "stat", "settings": { "number": "4.9★", "label": "Average rating" } }
+      },
+      "block_order": ["stat1", "stat2", "stat3"]
+    },
+    "marquee": {
+      "type": "marquee-text",
+      "blocks": {
+        "m1": { "type": "item", "settings": { "text": "Price Smash" } },
+        "m2": { "type": "item", "settings": { "text": "New arrivals weekly" } },
+        "m3": { "type": "item", "settings": { "text": "Free shipping over QAR 200" } },
+        "m4": { "type": "item", "settings": { "text": "Premium quality" } }
+      },
+      "block_order": ["m1", "m2", "m3", "m4"]
+    },
+    "categories": {
+      "type": "category-showcase",
+      "blocks": {
+        "c1": { "type": "category" },
+        "c2": { "type": "category" },
+        "c3": { "type": "category" },
+        "c4": { "type": "category" },
+        "c5": { "type": "category" },
+        "c6": { "type": "category" },
+        "c7": { "type": "category" },
+        "c8": { "type": "category" }
+      },
+      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"]
+    },
+    "featured": {
+      "type": "featured-products",
+      "settings": {
+        "eyebrow": "Just dropped",
+        "heading": "New arrivals"
+      }
+    },
+    "promo": {
+      "type": "promo-countdown"
+    },
+    "bestsellers": {
+      "type": "featured-products",
+      "settings": {
+        "eyebrow": "Most loved",
+        "heading": "Best sellers"
+      }
+    },
+    "about": {
+      "type": "image-with-text"
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "t1": { "type": "testimonial", "settings": { "quote": "Amazing quality and the delivery was faster than expected. The perfume smells exactly like the original. Will definitely order again!", "name": "Ahmed", "role": "Doha, Qatar" } },
+        "t2": { "type": "testimonial", "settings": { "quote": "Ordered a women's set and a watch — both arrived beautifully packaged. The quality for this price is unbeatable.", "name": "Maryam", "role": "Al Rayyan, Qatar" } },
+        "t3": { "type": "testimonial", "settings": { "quote": "The plus-size hoodies actually fit properly, which is rare. Great fabric and the colors look just like the photos.", "name": "Khalid", "role": "Al Wakrah, Qatar" } },
+        "t4": { "type": "testimonial", "settings": { "quote": "Customer support answered me on WhatsApp within minutes and helped me exchange a size. Five stars.", "name": "Noora", "role": "Doha, Qatar" } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4"]
+    },
+    "trust": {
+      "type": "trust-badges",
+      "blocks": {
+        "b1": { "type": "badge", "settings": { "icon": "truck", "title": "Fast delivery", "text": "Across Qatar in 1–3 business days." } },
+        "b2": { "type": "badge", "settings": { "icon": "refresh", "title": "Easy returns", "text": "14-day hassle-free returns." } },
+        "b3": { "type": "badge", "settings": { "icon": "shield", "title": "Secure checkout", "text": "Your payment details stay protected." } },
+        "b4": { "type": "badge", "settings": { "icon": "headset", "title": "Real support", "text": "We reply fast — WhatsApp & email." } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"]
+    },
+    "newsletter": {
+      "type": "newsletter"
+    }
+  },
+  "order": ["hero", "marquee", "categories", "featured", "promo", "bestsellers", "about", "testimonials", "trust", "newsletter"]
+}

@@ -1,0 +1,32 @@
+<div class="page-width customer-page">
+  <div class="customer-card reveal">
+    <h1>{{ 'customer.login.title' | t }}</h1>
+    <p>{{ 'customer.login.subtitle' | t }}</p>
+
+    {%- form 'customer_login' -%}
+      {%- if form.errors -%}
+        <div class="form-status form-status--error">{{ form.errors | default_errors }}</div>
+      {%- endif -%}
+      <div class="field">
+        <label class="field__label" for="LoginEmail">{{ 'customer.general.email' | t }}</label>
+        <input class="field__input" type="email" id="LoginEmail" name="customer[email]" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label class="field__label" for="LoginPassword">{{ 'customer.general.password' | t }}</label>
+        <input class="field__input" type="password" id="LoginPassword" name="customer[password]" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn btn--primary btn--full">{{ 'customer.login.submit' | t }}</button>
+      <div class="customer-links">
+        <a href="{{ routes.account_recover_url }}">{{ 'customer.login.forgot' | t }}</a>
+        <a href="{{ routes.account_register_url }}">{{ 'customer.login.create_account' | t }}</a>
+      </div>
+    {%- endform -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Login",
+  "settings": []
+}
+{% endschema %}

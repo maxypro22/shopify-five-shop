@@ -1,0 +1,46 @@
+<div class="page-hero">
+  <div class="page-width">
+    <span class="section-header__eyebrow" style="justify-content: center;">{{ 'blogs.general.eyebrow' | t }}</span>
+    <h1 class="reveal">{{ blog.title | escape }}</h1>
+  </div>
+</div>
+
+<div class="page-width">
+  {%- paginate blog.articles by 9 -%}
+    <div class="blog-grid">
+      {%- for article in blog.articles -%}
+        <article class="article-card reveal" style="--reveal-delay: {{ forloop.index0 | modulo: 3 | times: 0.08 }}s">
+          {%- if article.image -%}
+            <a href="{{ article.url }}" class="article-card__media">
+              {{ article.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 600, 800', sizes: '(min-width: 990px) 33vw, 100vw', alt: article.title | escape }}
+            </a>
+          {%- endif -%}
+          <div class="article-card__content">
+            <div class="article-card__meta">
+              <span>{{ article.published_at | date: format: 'month_day_year' }}</span>
+              {%- if article.author != blank -%}
+                <span>·</span><span>{{ article.author | escape }}</span>
+              {%- endif -%}
+            </div>
+            <h2 class="article-card__title"><a href="{{ article.url }}">{{ article.title | escape }}</a></h2>
+            <p class="article-card__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 160 }}</p>
+            <a href="{{ article.url }}" class="link-arrow" style="margin-block-start: auto;">
+              {{ 'blogs.general.read_more' | t }}
+              {% render 'icon', icon: 'arrow-right' %}
+            </a>
+          </div>
+        </article>
+      {%- else -%}
+        <p class="text-2">{{ 'blogs.general.empty' | t }}</p>
+      {%- endfor -%}
+    </div>
+    {% render 'pagination', paginate: paginate %}
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": []
+}
+{% endschema %}

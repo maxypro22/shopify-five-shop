@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "main": {
+      "type": "contact",
+      "blocks": {
+        "i1": { "type": "info", "settings": { "icon": "mail", "title": "Email us", "text": "support@shopfive.qa" } },
+        "i2": { "type": "info", "settings": { "icon": "whatsapp", "title": "WhatsApp", "text": "+974 0000 0000" } },
+        "i3": { "type": "info", "settings": { "icon": "map-pin", "title": "Location", "text": "Doha, Qatar" } },
+        "i4": { "type": "info", "settings": { "icon": "clock", "title": "Working hours", "text": "Sun–Thu, 9:00–18:00" } }
+      },
+      "block_order": ["i1", "i2", "i3", "i4"]
+    },
+    "trust": {
+      "type": "trust-badges",
+      "blocks": {
+        "b1": { "type": "badge", "settings": { "icon": "truck", "title": "Fast delivery", "text": "Across Qatar in 1–3 business days." } },
+        "b2": { "type": "badge", "settings": { "icon": "refresh", "title": "Easy returns", "text": "14-day hassle-free returns." } },
+        "b3": { "type": "badge", "settings": { "icon": "shield", "title": "Secure checkout", "text": "Your payment details stay protected." } },
+        "b4": { "type": "badge", "settings": { "icon": "headset", "title": "Real support", "text": "We reply fast — WhatsApp & email." } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"]
+    }
+  },
+  "order": ["main", "trust"]
+}

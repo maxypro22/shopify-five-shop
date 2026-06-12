@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-404"
+    },
+    "featured": {
+      "type": "featured-products",
+      "settings": {
+        "eyebrow": "Keep exploring",
+        "heading": "Popular right now"
+      }
+    }
+  },
+  "order": ["main", "featured"]
+}

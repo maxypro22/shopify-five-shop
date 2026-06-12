@@ -1,0 +1,60 @@
+<section class="section-spacing">
+  <div class="page-width">
+    <div class="image-text{% if section.settings.layout == 'reverse' %} image-text--reverse{% endif %}">
+      <div class="image-text__media reveal">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '500, 750, 1000', sizes: '(min-width: 990px) 50vw, 100vw', alt: section.settings.image.alt | escape }}
+        {%- else -%}
+          <div class="category-card__placeholder" style="position: absolute; inset: 0;">
+            {{ 'lifestyle-2' | placeholder_svg_tag }}
+          </div>
+        {%- endif -%}
+      </div>
+      <div class="image-text__content reveal" style="--reveal-delay: 0.12s">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="section-header__eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        {%- endif -%}
+        <h2>{{ section.settings.heading | escape }}</h2>
+        {{ section.settings.text }}
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link }}" class="btn btn--primary">
+            {{ section.settings.button_label | escape }}
+            {% render 'icon', icon: 'arrow-right' %}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image with text",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "About Shop Five" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Curated quality, honest prices" },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>We hand-pick every piece in our store — from inspired fragrances and watches to everyday fits — so you always get premium quality without the premium markup. Fast delivery across Qatar, easy returns, and support that actually replies.</p>"
+    },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Our story" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Image position",
+      "default": "normal",
+      "options": [
+        { "value": "normal", "label": "Image first" },
+        { "value": "reverse", "label": "Text first" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Image with text" }
+  ]
+}
+{% endschema %}

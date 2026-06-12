@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-cart"
+    },
+    "featured": {
+      "type": "featured-products",
+      "settings": {
+        "eyebrow": "Before you go",
+        "heading": "You may also like"
+      }
+    }
+  },
+  "order": ["main", "featured"]
+}

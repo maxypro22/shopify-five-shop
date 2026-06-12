@@ -1,0 +1,77 @@
+{%- liquid
+  comment
+    Renders a product card.
+    Usage: {% render 'product-card', card_product: product, index: forloop.index0 %}
+  endcomment
+-%}
+{%- if card_product and card_product != empty -%}
+  {%- liquid
+    assign on_sale = false
+    if card_product.compare_at_price > card_product.price
+      assign on_sale = true
+      assign discount = card_product.compare_at_price | minus: card_product.price | times: 100.0 | divided_by: card_product.compare_at_price | round
+    endif
+    assign is_new = false
+    assign new_cutoff = 'now' | date: '%s' | minus: 2592000
+    assign published = card_product.published_at | date: '%s'
+    if published > new_cutoff
+      assign is_new = true
+    endif
+  -%}
+  <article class="product-card reveal" {% if index %}style="--reveal-delay: {{ index | times: 0.07 }}s"{% endif %}>
+    <div class="product-card__media">
+      <div class="product-card__badges">
+        {%- if card_product.available == false -%}
+          <span class="badge badge--soldout">{{ 'products.product.sold_out' | t }}</span>
+        {%- elsif on_sale -%}
+          <span class="badge badge--sale">-{{ discount }}%</span>
+        {%- elsif is_new -%}
+          <span class="badge badge--new">{{ 'products.product.new' | t }}</span>
+        {%- endif -%}
+      </div>
+
+      {%- if card_product.featured_media -%}
+        {{ card_product.featured_media | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300, 450, 600', sizes: '(min-width: 990px) 25vw, 50vw', alt: card_product.featured_media.alt | escape }}
+        {%- if card_product.media[1] -%}
+          {{ card_product.media[1] | image_url: width: 600 | image_tag: loading: 'lazy', class: 'product-card__hover-img', alt: '' }}
+        {%- endif -%}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'product-card__placeholder' }}
+      {%- endif -%}
+
+      <div class="product-card__quick-add">
+        {%- if card_product.available == false -%}
+          <button type="button" class="btn btn--secondary btn--sm" disabled>{{ 'products.product.sold_out' | t }}</button>
+        {%- elsif card_product.variants.size == 1 and card_product.selling_plan_groups.size == 0 -%}
+          <form method="post" action="{{ routes.cart_add_url }}" data-product-form>
+            <input type="hidden" name="id" value="{{ card_product.first_available_variant.id }}">
+            <button type="submit" class="btn btn--primary btn--sm">
+              {% render 'icon', icon: 'cart' %}
+              {{ 'products.product.add_to_cart' | t }}
+            </button>
+          </form>
+        {%- else -%}
+          <a href="{{ card_product.url }}" class="btn btn--primary btn--sm">
+            {{ 'products.product.choose_options' | t }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="product-card__content">
+      {%- if card_product.vendor != blank and card_product.vendor != shop.name -%}
+        <span class="product-card__vendor">{{ card_product.vendor }}</span>
+      {%- endif -%}
+      <h3 class="product-card__title">
+        <a href="{{ card_product.url }}">{{ card_product.title | escape }}</a>
+      </h3>
+      <div class="product-card__price">
+        {% render 'price', product: card_product %}
+      </div>
+    </div>
+  </article>
+{%- else -%}
+  <div class="placeholder-card reveal">
+    {{ 'product-1' | placeholder_svg_tag }}
+  </div>
+{%- endif -%}

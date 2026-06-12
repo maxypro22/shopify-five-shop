@@ -1,0 +1,51 @@
+<div class="marquee-strip" style="--marquee-speed: {{ section.settings.speed }}s" aria-hidden="true">
+  <div class="marquee-strip__track" data-marquee>
+    <div class="marquee-strip__group" data-marquee-group>
+      {%- for block in section.blocks -%}
+        <span class="marquee-strip__item" {{ block.shopify_attributes }}>
+          {{ block.settings.text | escape }}
+          {% render 'icon', icon: 'sparkle' %}
+        </span>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Marquee strip",
+  "settings": [
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "s",
+      "label": "Speed (lower = faster)",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Text item",
+      "limit": 8,
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Free shipping over QAR 200" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee strip",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Price Smash" } },
+        { "type": "item", "settings": { "text": "New arrivals weekly" } },
+        { "type": "item", "settings": { "text": "Free shipping over QAR 200" } },
+        { "type": "item", "settings": { "text": "Premium quality" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

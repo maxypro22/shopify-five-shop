@@ -1,0 +1,178 @@
+<header class="site-header" data-site-header>
+  <div class="page-width site-header__inner">
+    <a href="{{ routes.root_url }}" class="site-header__logo">
+      {%- if settings.logo != blank -%}
+        {{ settings.logo | image_url: width: 300 | image_tag: alt: shop.name, preload: true }}
+      {%- else -%}
+        <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" width="44" height="44">
+      {%- endif -%}
+    </a>
+
+    <nav class="site-nav" aria-label="{{ 'sections.header.main_navigation' | t }}">
+      <ul class="site-nav__list">
+        {%- for link in section.settings.menu.links -%}
+          <li class="site-nav__item{% if link.active or link.child_active %} is-active{% endif %}">
+            <a href="{{ link.url }}" class="site-nav__link">
+              {{ link.title | escape }}
+              {%- if link.links != blank -%}
+                {% render 'icon', icon: 'chevron-down' %}
+              {%- endif -%}
+            </a>
+            {%- if link.links != blank -%}
+              <div class="site-nav__dropdown">
+                {%- for child in link.links -%}
+                  <a href="{{ child.url }}">{{ child.title | escape }}</a>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <button type="button" class="header-action theme-toggle" data-theme-toggle aria-label="{{ 'sections.header.toggle_color_mode' | t }}">
+        {% render 'icon', icon: 'sun' %}
+        {% render 'icon', icon: 'moon' %}
+      </button>
+
+      {%- if localization.available_languages.size > 1 -%}
+        <div class="locale-switcher" data-locale-switcher>
+          <button type="button" class="header-action" data-locale-toggle aria-expanded="false" aria-label="{{ 'sections.header.language' | t }}">
+            {% render 'icon', icon: 'globe' %}
+          </button>
+          <div class="locale-switcher__panel" hidden>
+            {%- form 'localization' -%}
+              {%- for language in localization.available_languages -%}
+                <button type="submit" name="locale_code" value="{{ language.iso_code }}"
+                  {% if language.iso_code == localization.language.iso_code %}aria-current="true"{% endif %}>
+                  {{ language.endonym_name | capitalize }}
+                  {%- if language.iso_code == localization.language.iso_code -%}
+                    {% render 'icon', icon: 'check' %}
+                  {%- endif -%}
+                </button>
+              {%- endfor -%}
+            {%- endform -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      <button type="button" class="header-action" data-search-open aria-label="{{ 'general.search.title' | t }}">
+        {% render 'icon', icon: 'search' %}
+      </button>
+
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header-action" aria-label="{{ 'customer.account.title' | t }}">
+          {% render 'icon', icon: 'user' %}
+        </a>
+      {%- endif -%}
+
+      <button type="button" class="header-action" data-drawer-open="#CartDrawer" aria-label="{{ 'cart.general.title' | t }}">
+        {% render 'icon', icon: 'cart' %}
+        <span class="cart-count-bubble" data-cart-count data-count="{{ cart.item_count }}">{{ cart.item_count }}</span>
+      </button>
+
+      <button type="button" class="header-action header-action--menu" data-drawer-open="#MenuDrawer" aria-label="{{ 'sections.header.menu' | t }}">
+        {% render 'icon', icon: 'menu' %}
+      </button>
+    </div>
+  </div>
+</header>
+
+{%- comment -%} Search overlay {%- endcomment -%}
+<div class="search-overlay" data-search-overlay role="dialog" aria-modal="true" aria-label="{{ 'general.search.title' | t }}">
+  <button type="button" class="drawer__close search-overlay__close" data-search-close aria-label="{{ 'general.accessibility.close' | t }}">
+    {% render 'icon', icon: 'close' %}
+  </button>
+  <div class="search-overlay__box">
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-overlay__form">
+      {% render 'icon', icon: 'search' %}
+      <input type="search" name="q" class="search-overlay__input" placeholder="{{ 'general.search.placeholder' | t }}" autocomplete="off">
+      <input type="hidden" name="options[prefix]" value="last">
+      <button type="submit" class="btn btn--primary btn--sm search-overlay__submit">{{ 'general.search.submit' | t }}</button>
+    </form>
+    {%- if section.settings.search_menu != blank -%}
+      <div class="search-overlay__suggestions">
+        {%- for link in section.settings.search_menu.links limit: 8 -%}
+          <a href="{{ link.url }}">{{ link.title | escape }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{%- comment -%} Mobile menu drawer {%- endcomment -%}
+<div id="MenuDrawer" class="drawer drawer--start" role="dialog" aria-modal="true" aria-hidden="true" aria-label="{{ 'sections.header.menu' | t }}">
+  <div class="drawer__header">
+    <span class="drawer__title">{{ shop.name }}</span>
+    <button type="button" class="drawer__close" data-drawer-close aria-label="{{ 'general.accessibility.close' | t }}">
+      {% render 'icon', icon: 'close' %}
+    </button>
+  </div>
+  <div class="drawer__body">
+    <ul class="mobile-nav__list">
+      {%- for link in section.settings.menu.links -%}
+        <li>
+          {%- if link.links != blank -%}
+            <details>
+              <summary class="mobile-nav__toggle">
+                {{ link.title | escape }}
+                {% render 'icon', icon: 'chevron-down' %}
+              </summary>
+              <ul class="mobile-nav__sub">
+                <li><a href="{{ link.url }}">{{ 'sections.header.view_all' | t }}</a></li>
+                {%- for child in link.links -%}
+                  <li><a href="{{ child.url }}">{{ child.title | escape }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </details>
+          {%- else -%}
+            <a href="{{ link.url }}" class="mobile-nav__link">{{ link.title | escape }}</a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+    <div class="mobile-nav__meta">
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="btn btn--secondary btn--full">
+          {% render 'icon', icon: 'user' %}
+          {{ 'customer.account.title' | t }}
+        </a>
+      {%- endif -%}
+      {%- if localization.available_languages.size > 1 -%}
+        {%- form 'localization' -%}
+          <div class="select-wrapper">
+            <select class="field__select" name="locale_code" onchange="this.form.submit()">
+              {%- for language in localization.available_languages -%}
+                <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %}>
+                  {{ language.endonym_name | capitalize }}
+                </option>
+              {%- endfor -%}
+            </select>
+            {% render 'icon', icon: 'chevron-down' %}
+          </div>
+        {%- endform -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "link_list",
+      "id": "search_menu",
+      "label": "Popular search suggestions menu",
+      "info": "Shown as quick links inside the search overlay"
+    }
+  ]
+}
+{% endschema %}

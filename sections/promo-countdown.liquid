@@ -1,0 +1,62 @@
+<section class="section-spacing">
+  <div class="page-width">
+    <div class="promo-banner reveal">
+      <div>
+        <span class="promo-banner__eyebrow">
+          {% render 'icon', icon: 'fire' %}
+          {{ section.settings.eyebrow | escape }}
+        </span>
+        <h2 class="promo-banner__title">{{ section.settings.heading | escape }}</h2>
+        <p class="promo-banner__text">{{ section.settings.text | escape }}</p>
+        <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="btn btn--inverse">
+          {{ section.settings.button_label | escape }}
+          {% render 'icon', icon: 'arrow-right' %}
+        </a>
+      </div>
+
+      {%- if section.settings.end_date != blank -%}
+        <div class="countdown" data-countdown="{{ section.settings.end_date }}T23:59:59">
+          <div class="countdown__unit">
+            <span class="countdown__value" data-cd-days>00</span>
+            <span class="countdown__label">{{ 'general.countdown.days' | t }}</span>
+          </div>
+          <div class="countdown__unit">
+            <span class="countdown__value" data-cd-hours>00</span>
+            <span class="countdown__label">{{ 'general.countdown.hours' | t }}</span>
+          </div>
+          <div class="countdown__unit">
+            <span class="countdown__value" data-cd-minutes>00</span>
+            <span class="countdown__label">{{ 'general.countdown.minutes' | t }}</span>
+          </div>
+          <div class="countdown__unit">
+            <span class="countdown__value" data-cd-seconds>00</span>
+            <span class="countdown__label">{{ 'general.countdown.seconds' | t }}</span>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Promo countdown",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Price Smash" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Up to 50% off — limited time" },
+    { "type": "text", "id": "text", "label": "Text", "default": "Our biggest markdowns of the season on perfumes, fashion and watches. When the timer ends, prices go back up." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the sale" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    {
+      "type": "text",
+      "id": "end_date",
+      "label": "Sale end date (YYYY-MM-DD)",
+      "info": "Example: 2026-07-15. Leave empty to hide the countdown.",
+      "default": "2026-07-15"
+    }
+  ],
+  "presets": [
+    { "name": "Promo countdown" }
+  ]
+}
+{% endschema %}

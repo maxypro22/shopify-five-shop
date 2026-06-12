@@ -1,0 +1,115 @@
+<div class="page-hero">
+  <div class="page-width">
+    <span class="section-header__eyebrow" style="justify-content: center;">{{ section.settings.eyebrow | escape }}</span>
+    <h1 class="reveal">{{ section.settings.heading | default: page.title | escape }}</h1>
+    {%- if section.settings.subtitle != blank -%}
+      <p class="page-hero__subtitle reveal">{{ section.settings.subtitle | escape }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+<div class="page-width">
+  <div class="contact-layout">
+    <div class="contact-cards">
+      {%- for block in section.blocks -%}
+        <div class="contact-card reveal" style="--reveal-delay: {{ forloop.index0 | times: 0.08 }}s" {{ block.shopify_attributes }}>
+          <span class="contact-card__icon">{% render 'icon', icon: block.settings.icon %}</span>
+          <div>
+            <h3 class="contact-card__title">{{ block.settings.title | escape }}</h3>
+            {%- if block.settings.link != blank -%}
+              <a href="{{ block.settings.link }}" class="contact-card__text" style="color: var(--color-accent);">{{ block.settings.text | escape }}</a>
+            {%- else -%}
+              <p class="contact-card__text">{{ block.settings.text | escape }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="contact-form-card reveal" style="--reveal-delay: 0.15s">
+      <h2>{{ 'contact.form.title' | t }}</h2>
+      <p>{{ 'contact.form.subtitle' | t }}</p>
+
+      {%- form 'contact' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="form-status form-status--success">{{ 'contact.form.success' | t }}</p>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <div class="form-status form-status--error">
+            {{ 'contact.form.error' | t }}
+          </div>
+        {%- endif -%}
+
+        <div class="form-grid form-grid--2col">
+          <div class="field">
+            <label class="field__label" for="ContactName">{{ 'contact.form.name' | t }}</label>
+            <input class="field__input" type="text" id="ContactName" name="contact[name]" required value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}">
+          </div>
+          <div class="field">
+            <label class="field__label" for="ContactEmail">{{ 'contact.form.email' | t }}</label>
+            <input class="field__input" type="email" id="ContactEmail" name="contact[email]" required value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+          </div>
+          <div class="field field--full">
+            <label class="field__label" for="ContactPhone">{{ 'contact.form.phone' | t }}</label>
+            <input class="field__input" type="tel" id="ContactPhone" name="contact[phone]" value="{{ form.phone }}">
+          </div>
+          <div class="field field--full">
+            <label class="field__label" for="ContactMessage">{{ 'contact.form.message' | t }}</label>
+            <textarea class="field__textarea" id="ContactMessage" name="contact[body]" required>{{ form.body }}</textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn--primary">
+          {{ 'contact.form.send' | t }}
+          {% render 'icon', icon: 'arrow-right' %}
+        </button>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Contact",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Contact" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "We're here to help" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Questions about an order, sizing or delivery? Reach out any time — we usually reply within a few hours." }
+  ],
+  "blocks": [
+    {
+      "type": "info",
+      "name": "Info card",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "mail",
+          "options": [
+            { "value": "mail", "label": "Email" },
+            { "value": "phone", "label": "Phone" },
+            { "value": "whatsapp", "label": "WhatsApp" },
+            { "value": "map-pin", "label": "Location" },
+            { "value": "clock", "label": "Hours" }
+          ]
+        },
+        { "type": "text", "id": "title", "label": "Title", "default": "Email us" },
+        { "type": "text", "id": "text", "label": "Text", "default": "support@shopfive.qa" },
+        { "type": "url", "id": "link", "label": "Link (optional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact",
+      "blocks": [
+        { "type": "info", "settings": { "icon": "mail", "title": "Email us", "text": "support@shopfive.qa" } },
+        { "type": "info", "settings": { "icon": "whatsapp", "title": "WhatsApp", "text": "+974 0000 0000" } },
+        { "type": "info", "settings": { "icon": "map-pin", "title": "Location", "text": "Doha, Qatar" } },
+        { "type": "info", "settings": { "icon": "clock", "title": "Working hours", "text": "Sun–Thu, 9:00–18:00" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

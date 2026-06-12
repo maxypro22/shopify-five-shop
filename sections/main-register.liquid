@@ -1,0 +1,39 @@
+<div class="page-width customer-page">
+  <div class="customer-card reveal">
+    <h1>{{ 'customer.register.title' | t }}</h1>
+    <p>{{ 'customer.register.subtitle' | t }}</p>
+
+    {%- form 'create_customer' -%}
+      {%- if form.errors -%}
+        <div class="form-status form-status--error">{{ form.errors | default_errors }}</div>
+      {%- endif -%}
+      <div class="field">
+        <label class="field__label" for="RegisterFirstName">{{ 'customer.general.first_name' | t }}</label>
+        <input class="field__input" type="text" id="RegisterFirstName" name="customer[first_name]" autocomplete="given-name">
+      </div>
+      <div class="field">
+        <label class="field__label" for="RegisterLastName">{{ 'customer.general.last_name' | t }}</label>
+        <input class="field__input" type="text" id="RegisterLastName" name="customer[last_name]" autocomplete="family-name">
+      </div>
+      <div class="field">
+        <label class="field__label" for="RegisterEmail">{{ 'customer.general.email' | t }}</label>
+        <input class="field__input" type="email" id="RegisterEmail" name="customer[email]" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label class="field__label" for="RegisterPassword">{{ 'customer.general.password' | t }}</label>
+        <input class="field__input" type="password" id="RegisterPassword" name="customer[password]" autocomplete="new-password" required>
+      </div>
+      <button type="submit" class="btn btn--primary btn--full">{{ 'customer.register.submit' | t }}</button>
+      <div class="customer-links">
+        <a href="{{ routes.account_login_url }}">{{ 'customer.register.have_account' | t }}</a>
+      </div>
+    {%- endform -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Register",
+  "settings": []
+}
+{% endschema %}

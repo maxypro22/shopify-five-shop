@@ -1,0 +1,86 @@
+<div class="page-width cart-page">
+  <h1 class="reveal">{{ 'cart.general.title' | t }}</h1>
+
+  {%- if cart.item_count == 0 -%}
+    <div class="cart-drawer__empty" style="padding-block: 8rem;">
+      {% render 'icon', icon: 'cart' %}
+      <h2 class="cart-drawer__empty-title">{{ 'cart.general.empty' | t }}</h2>
+      <p class="text-2">{{ 'cart.general.empty_text' | t }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary">{{ 'cart.general.continue_shopping' | t }}</a>
+    </div>
+  {%- else -%}
+    <form action="{{ routes.cart_url }}" method="post" class="cart-page__layout">
+      <div class="cart-page__items">
+        {%- for item in cart.items -%}
+          <div class="cart-page__row reveal" style="--reveal-delay: {{ forloop.index0 | times: 0.05 }}s">
+            <a href="{{ item.url }}" class="cart-item__media">
+              {%- if item.image -%}
+                {{ item.image | image_url: width: 240 | image_tag: loading: 'lazy', alt: item.title | escape }}
+              {%- endif -%}
+            </a>
+            <div>
+              <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title | escape }}</a>
+              {%- unless item.product.has_only_default_variant -%}
+                <p class="cart-item__meta">{{ item.variant.title | escape }}</p>
+              {%- endunless -%}
+              <div class="cart-item__bottom" style="justify-content: flex-start; gap: 2rem;">
+                <div class="quantity">
+                  <button type="button" class="quantity__button" data-quantity-change="down" aria-label="{{ 'cart.items.decrease' | t }}">
+                    {% render 'icon', icon: 'minus' %}
+                  </button>
+                  <input type="number" class="quantity__input" name="updates[]" value="{{ item.quantity }}" min="0" data-line="{{ forloop.index }}" aria-label="{{ 'cart.items.quantity' | t }}">
+                  <button type="button" class="quantity__button" data-quantity-change="up" aria-label="{{ 'cart.items.increase' | t }}">
+                    {% render 'icon', icon: 'plus' %}
+                  </button>
+                </div>
+                <button type="button" class="cart-item__remove" data-cart-remove="{{ forloop.index }}" style="margin: 0;">
+                  {% render 'icon', icon: 'trash' %}
+                  {{ 'cart.items.remove' | t }}
+                </button>
+              </div>
+            </div>
+            <span class="cart-item__price">
+              {%- if item.original_line_price != item.final_line_price -%}
+                <s>{{ item.original_line_price | money }}</s>
+              {%- endif -%}
+              {{ item.final_line_price | money }}
+            </span>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <aside class="cart-page__summary reveal" style="--reveal-delay: 0.15s">
+        <h2>{{ 'cart.general.summary' | t }}</h2>
+        {%- if section.settings.show_note -%}
+          <div class="cart-note" style="margin-block-end: 2rem;">
+            <label for="CartNote">{{ 'cart.general.note' | t }}</label>
+            <textarea id="CartNote" name="note">{{ cart.note }}</textarea>
+          </div>
+        {%- endif -%}
+        {%- for discount in cart.cart_level_discount_applications -%}
+          <div class="cart-summary__row" style="color: var(--color-success);">
+            <span>{{ discount.title | escape }}</span>
+            <span>-{{ discount.total_allocated_amount | money }}</span>
+          </div>
+        {%- endfor -%}
+        <div class="cart-summary__row cart-summary__row--total">
+          <span>{{ 'cart.general.subtotal' | t }}</span>
+          <span>{{ cart.total_price | money }}</span>
+        </div>
+        <button type="submit" name="checkout" class="btn btn--primary btn--full">
+          {{ 'cart.general.checkout' | t }}
+        </button>
+        <p class="cart-summary__note">{{ 'cart.general.taxes_note' | t }}</p>
+      </aside>
+    </form>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Cart page",
+  "settings": [
+    { "type": "checkbox", "id": "show_note", "label": "Show order note", "default": true }
+  ]
+}
+{% endschema %}

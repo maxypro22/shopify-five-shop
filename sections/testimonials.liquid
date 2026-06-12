@@ -1,0 +1,73 @@
+<section class="section-spacing" data-slider>
+  <div class="page-width">
+    <div class="section-header reveal">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="section-header__eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        {%- endif -%}
+        <h2>{{ section.settings.heading | escape }}</h2>
+      </div>
+      <div class="slider-nav">
+        <button type="button" class="slider-nav__btn" data-slider-prev aria-label="{{ 'general.slider.previous' | t }}">
+          {% render 'icon', icon: 'chevron-left' %}
+        </button>
+        <button type="button" class="slider-nav__btn" data-slider-next aria-label="{{ 'general.slider.next' | t }}">
+          {% render 'icon', icon: 'chevron-right' %}
+        </button>
+      </div>
+    </div>
+
+    <div class="testimonials__track" data-slider-track>
+      {%- for block in section.blocks -%}
+        <article class="testimonial-card reveal" style="--reveal-delay: {{ forloop.index0 | times: 0.08 }}s" {{ block.shopify_attributes }}>
+          <div class="testimonial-card__stars" aria-label="{{ block.settings.stars }}/5">
+            {%- for i in (1..block.settings.stars) -%}
+              {% render 'icon', icon: 'star' %}
+            {%- endfor -%}
+          </div>
+          <blockquote class="testimonial-card__quote">{{ block.settings.quote | escape }}</blockquote>
+          <div class="testimonial-card__author">
+            <span class="testimonial-card__avatar">{{ block.settings.name | slice: 0 | upcase }}</span>
+            <div>
+              <div class="testimonial-card__name">{{ block.settings.name | escape }}</div>
+              <div class="testimonial-card__role">{{ block.settings.role | escape }}</div>
+            </div>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Reviews" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What our customers say" }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "range", "id": "stars", "min": 1, "max": 5, "step": 1, "label": "Stars", "default": 5 },
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "Amazing quality and the delivery was faster than expected. The perfume smells exactly like the original. Will definitely order again!" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Ahmed" },
+        { "type": "text", "id": "role", "label": "Role / location", "default": "Doha, Qatar" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        { "type": "testimonial", "settings": { "quote": "Amazing quality and the delivery was faster than expected. The perfume smells exactly like the original. Will definitely order again!", "name": "Ahmed", "role": "Doha, Qatar" } },
+        { "type": "testimonial", "settings": { "quote": "Ordered a women's set and a watch — both arrived beautifully packaged. The quality for this price is unbeatable.", "name": "Maryam", "role": "Al Rayyan, Qatar" } },
+        { "type": "testimonial", "settings": { "quote": "The plus-size hoodies actually fit properly, which is rare. Great fabric and the colors look just like the photos.", "name": "Khalid", "role": "Al Wakrah, Qatar" } },
+        { "type": "testimonial", "settings": { "quote": "Customer support answered me on WhatsApp within minutes and helped me exchange a size. Five stars.", "name": "Noora", "role": "Doha, Qatar" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
