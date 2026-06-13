@@ -5,22 +5,32 @@
     "logo_width": 130,
     "enable_animations": true,
     "free_shipping_threshold": 200,
+    "social_instagram": "https://instagram.com/shop_qtr",
+    "social_tiktok": "https://www.tiktok.com/@shop_qtr5",
+    "social_snapchat": "https://www.snapchat.com/add/shop_qtr5",
+    "social_youtube": "https://www.youtube.com/channel/UCY3IDSbcY1X2u1T61epmEGQ",
+    "social_whatsapp": "https://wa.me/97477663166",
+    "app_store_url": "https://apps.apple.com/qa/app/shop-five-qatar/id1621345100",
+    "play_store_url": "https://play.google.com/store/apps/details?id=qa.shop5",
     "sections": {
       "announcement-ticker": {
         "type": "announcement-ticker",
         "blocks": {
-          "a1": { "type": "announcement", "settings": { "text": "Free shipping on orders over QAR 200", "icon": "truck" } },
-          "a2": { "type": "announcement", "settings": { "text": "Price Smash — up to 50% off", "icon": "fire" } },
-          "a3": { "type": "announcement", "settings": { "text": "New arrivals every week", "icon": "sparkle" } },
-          "a4": { "type": "announcement", "settings": { "text": "Cash on delivery available in Qatar", "icon": "shield" } }
+          "a1": { "type": "announcement", "settings": { "text": "توصيل لجميع مناطق الدوحة خلال أربع ساعات فقط 🛍️", "icon": "truck" } },
+          "a2": { "type": "announcement", "settings": { "text": "تحطيم الأسعار — Price Smash up to 50% off", "icon": "fire" } },
+          "a3": { "type": "announcement", "settings": { "text": "Free shipping on orders over QAR 200", "icon": "tag" } },
+          "a4": { "type": "announcement", "settings": { "text": "شوب فايف — سجل تجاري رقم 156821", "icon": "shield" } }
         },
         "block_order": ["a1", "a2", "a3", "a4"]
       },
       "footer": {
         "type": "footer",
+        "settings": {
+          "brand_text": "شوب فايف للمستلزمات الرجالية — Shop Five, Men's Stuff. شركة شوب فايف للتجارة · +974 44440085 · +974 77663166"
+        },
         "blocks": {
-          "menu1": { "type": "link_list", "settings": { "heading": "Shop", "menu": "main-menu" } },
-          "menu2": { "type": "link_list", "settings": { "heading": "Support", "menu": "footer" } },
+          "menu1": { "type": "link_list", "settings": { "heading": "Shop | الأقسام", "menu": "main-menu" } },
+          "menu2": { "type": "link_list", "settings": { "heading": "Support | الدعم", "menu": "footer" } },
           "news": { "type": "newsletter" }
         },
         "block_order": ["menu1", "menu2", "news"]

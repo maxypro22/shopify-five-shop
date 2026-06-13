@@ -63,7 +63,9 @@
       "view_all": "View all"
     },
     "footer": {
-      "rights": "All rights reserved."
+      "rights": "All rights reserved.",
+      "download_on": "Download on the",
+      "get_it_on": "Get it on"
     },
     "categories": {
       "view_all": "View all categories",

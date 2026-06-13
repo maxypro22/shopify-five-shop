@@ -39,6 +39,23 @@
             <a href="{{ settings.social_youtube }}" target="_blank" rel="noopener" aria-label="YouTube">{% render 'icon', icon: 'youtube' %}</a>
           {%- endif -%}
         </div>
+
+        {%- if settings.app_store_url != blank or settings.play_store_url != blank -%}
+          <div class="app-badges">
+            {%- if settings.app_store_url != blank -%}
+              <a href="{{ settings.app_store_url }}" target="_blank" rel="noopener" class="app-badge">
+                {% render 'icon', icon: 'apple' %}
+                <span><small>{{ 'sections.footer.download_on' | t }}</small>App Store</span>
+              </a>
+            {%- endif -%}
+            {%- if settings.play_store_url != blank -%}
+              <a href="{{ settings.play_store_url }}" target="_blank" rel="noopener" class="app-badge">
+                {% render 'icon', icon: 'google-play' %}
+                <span><small>{{ 'sections.footer.get_it_on' | t }}</small>Google Play</span>
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
       </div>
 
       {%- for block in section.blocks -%}

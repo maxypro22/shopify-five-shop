@@ -1629,6 +1629,57 @@ html[data-theme='dark'] .social-links a {
   height: 1.8rem;
 }
 
+.app-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-block-start: 2rem;
+}
+
+.app-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.6rem;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  line-height: 1.2;
+  transition: border-color var(--duration-fast) ease, background-color var(--duration-fast) ease,
+              transform var(--duration-fast) var(--ease-out);
+}
+
+html[data-theme='dark'] .app-badge {
+  background: var(--color-surface-2);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.app-badge:hover {
+  border-color: var(--color-accent);
+  background: rgba(var(--color-accent-rgb), 0.18);
+  transform: translateY(-3px);
+}
+
+.app-badge .icon {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.app-badge span {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.45rem;
+  font-weight: 700;
+}
+
+.app-badge small {
+  font-size: 1.05rem;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
 .site-footer__newsletter p {
   font-size: 1.4rem;
   margin-block-end: 1.6rem;

@@ -80,6 +80,13 @@
     ]
   },
   {
+    "name": "Mobile app",
+    "settings": [
+      { "type": "url", "id": "app_store_url", "label": "App Store link (iOS)" },
+      { "type": "url", "id": "play_store_url", "label": "Google Play link (Android)" }
+    ]
+  },
+  {
     "name": "Social media",
     "settings": [
       { "type": "url", "id": "social_instagram", "label": "Instagram" },

@@ -2,6 +2,19 @@
   "sections": {
     "hero": {
       "type": "hero",
+      "settings": {
+        "eyebrow": "New season · New drops",
+        "heading": "Style that <em>speaks</em> for you",
+        "text": "Discover premium fashion, inspired fragrances, watches and more — curated for Qatar and delivered to your door.",
+        "button_label": "Shop now",
+        "button_link": "shopify://collections/all",
+        "button_label_2": "Browse categories",
+        "button_link_2": "shopify://collections",
+        "card_1_title": "4-hour delivery",
+        "card_1_text": "All over Doha",
+        "card_2_title": "Price Smash",
+        "card_2_text": "Up to 50% off"
+      },
       "blocks": {
         "stat1": { "type": "stat", "settings": { "number": "10k+", "label": "Happy customers" } },
         "stat2": { "type": "stat", "settings": { "number": "14", "label": "Categories" } },
@@ -12,46 +25,83 @@
     "marquee": {
       "type": "marquee-text",
       "blocks": {
-        "m1": { "type": "item", "settings": { "text": "Price Smash" } },
-        "m2": { "type": "item", "settings": { "text": "New arrivals weekly" } },
-        "m3": { "type": "item", "settings": { "text": "Free shipping over QAR 200" } },
-        "m4": { "type": "item", "settings": { "text": "Premium quality" } }
+        "m1": { "type": "item", "settings": { "text": "تحطيم الأسعار" } },
+        "m2": { "type": "item", "settings": { "text": "Price Smash" } },
+        "m3": { "type": "item", "settings": { "text": "توصيل خلال ٤ ساعات" } },
+        "m4": { "type": "item", "settings": { "text": "Free shipping over QAR 200" } }
       },
       "block_order": ["m1", "m2", "m3", "m4"]
     },
     "categories": {
       "type": "category-showcase",
-      "blocks": {
-        "c1": { "type": "category" },
-        "c2": { "type": "category" },
-        "c3": { "type": "category" },
-        "c4": { "type": "category" },
-        "c5": { "type": "category" },
-        "c6": { "type": "category" },
-        "c7": { "type": "category" },
-        "c8": { "type": "category" }
+      "settings": {
+        "eyebrow": "Categories",
+        "heading": "Shop by category",
+        "subtitle": "From inspired fragrances to watches — everything in one place."
       },
-      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"]
+      "blocks": {
+        "c1": { "type": "category", "settings": { "collection": "bargello-perfume", "title": "العطور المستوحاة" } },
+        "c2": { "type": "category", "settings": { "collection": "shoes", "title": "الأحذية" } },
+        "c3": { "type": "category", "settings": { "collection": "t-shirt", "title": "تيشيرت" } },
+        "c4": { "type": "category", "settings": { "collection": "oversized", "title": "أوفر سايز" } },
+        "c5": { "type": "category", "settings": { "collection": "cotton-shorts", "title": "شورت" } },
+        "c6": { "type": "category", "settings": { "collection": "set-t-shirt-short-أطقم", "title": "أطقم رجالية" } },
+        "c7": { "type": "category", "settings": { "collection": "أطقم-نسائية", "title": "أطقم نسائية" } },
+        "c8": { "type": "category", "settings": { "collection": "plus-size-hoodies-هودي-مقاسات-كبيرة", "title": "هودي مقاسات كبيرة" } },
+        "c9": { "type": "category", "settings": { "collection": "cap", "title": "كابات" } },
+        "c10": { "type": "category", "settings": { "collection": "mens-watch", "title": "ساعات رجالية" } },
+        "c11": { "type": "category", "settings": { "collection": "womens-watch", "title": "ساعات نسائية" } },
+        "c12": { "type": "category", "settings": { "collection": "glasses", "title": "نظارات" } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "c11", "c12"]
     },
     "featured": {
       "type": "featured-products",
       "settings": {
         "eyebrow": "Just dropped",
-        "heading": "New arrivals"
+        "heading": "Shoes · أحذية",
+        "collection": "shoes",
+        "limit": 8
       }
     },
     "promo": {
-      "type": "promo-countdown"
+      "type": "promo-countdown",
+      "settings": {
+        "eyebrow": "Price Smash · تحطيم الأسعار",
+        "heading": "Up to 50% off — limited time",
+        "text": "Our biggest markdowns of the season on perfumes, fashion and watches. When the timer ends, prices go back up.",
+        "button_label": "Shop the sale",
+        "button_link": "shopify://collections/all",
+        "end_date": "2026-07-15"
+      }
     },
     "bestsellers": {
       "type": "featured-products",
       "settings": {
         "eyebrow": "Most loved",
-        "heading": "Best sellers"
+        "heading": "Oversized T-shirts · تيشيرت",
+        "collection": "t-shirt",
+        "limit": 8
+      }
+    },
+    "watches": {
+      "type": "featured-products",
+      "settings": {
+        "eyebrow": "Timeless",
+        "heading": "Watches · ساعات",
+        "collection": "mens-watch",
+        "limit": 8
       }
     },
     "about": {
-      "type": "image-with-text"
+      "type": "image-with-text",
+      "settings": {
+        "eyebrow": "About Shop Five",
+        "heading": "شوب فايف للمستلزمات الرجالية",
+        "text": "<p>We hand-pick every piece in our store — from inspired fragrances and watches to everyday fits — so you always get premium quality without the premium markup. Delivery across all of Doha within 4 hours, easy returns, and support that actually replies.</p><p>Shop Five Trading Co. — CR No. 156821, Doha, Qatar.</p>",
+        "button_label": "Our story",
+        "layout": "normal"
+      }
     },
     "testimonials": {
       "type": "testimonials",
@@ -66,10 +116,10 @@
     "trust": {
       "type": "trust-badges",
       "blocks": {
-        "b1": { "type": "badge", "settings": { "icon": "truck", "title": "Fast delivery", "text": "Across Qatar in 1–3 business days." } },
+        "b1": { "type": "badge", "settings": { "icon": "truck", "title": "4-hour delivery", "text": "To all areas of Doha — توصيل خلال ٤ ساعات" } },
         "b2": { "type": "badge", "settings": { "icon": "refresh", "title": "Easy returns", "text": "14-day hassle-free returns." } },
-        "b3": { "type": "badge", "settings": { "icon": "shield", "title": "Secure checkout", "text": "Your payment details stay protected." } },
-        "b4": { "type": "badge", "settings": { "icon": "headset", "title": "Real support", "text": "We reply fast — WhatsApp & email." } }
+        "b3": { "type": "badge", "settings": { "icon": "shield", "title": "Secure checkout", "text": "Registered company — CR No. 156821." } },
+        "b4": { "type": "badge", "settings": { "icon": "headset", "title": "Real support", "text": "WhatsApp +974 77663166 — we reply fast." } }
       },
       "block_order": ["b1", "b2", "b3", "b4"]
     },
@@ -77,5 +127,5 @@
       "type": "newsletter"
     }
   },
-  "order": ["hero", "marquee", "categories", "featured", "promo", "bestsellers", "about", "testimonials", "trust", "newsletter"]
+  "order": ["hero", "marquee", "categories", "featured", "promo", "bestsellers", "watches", "about", "testimonials", "trust", "newsletter"]
 }

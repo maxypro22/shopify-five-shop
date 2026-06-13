@@ -7,7 +7,8 @@
       "type": "featured-products",
       "settings": {
         "eyebrow": "Keep exploring",
-        "heading": "Popular right now"
+        "heading": "Popular right now",
+        "collection": "shoes"
       }
     }
   },
