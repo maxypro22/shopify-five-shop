@@ -40,20 +40,24 @@
         "subtitle": "From inspired fragrances to watches — everything in one place."
       },
       "blocks": {
-        "c1": { "type": "category", "settings": { "collection": "bargello-perfume", "title": "العطور المستوحاة" } },
+        "c1": { "type": "category", "settings": { "collection": "العطور", "title": "العطور المستوحاة" } },
         "c2": { "type": "category", "settings": { "collection": "shoes", "title": "الأحذية" } },
         "c3": { "type": "category", "settings": { "collection": "t-shirt", "title": "تيشيرت" } },
-        "c4": { "type": "category", "settings": { "collection": "oversized", "title": "أوفر سايز" } },
-        "c5": { "type": "category", "settings": { "collection": "cotton-shorts", "title": "شورت" } },
-        "c6": { "type": "category", "settings": { "collection": "set-t-shirt-short-أطقم", "title": "أطقم رجالية" } },
-        "c7": { "type": "category", "settings": { "collection": "أطقم-نسائية", "title": "أطقم نسائية" } },
-        "c8": { "type": "category", "settings": { "collection": "plus-size-hoodies-هودي-مقاسات-كبيرة", "title": "هودي مقاسات كبيرة" } },
-        "c9": { "type": "category", "settings": { "collection": "cap", "title": "كابات" } },
-        "c10": { "type": "category", "settings": { "collection": "mens-watch", "title": "ساعات رجالية" } },
-        "c11": { "type": "category", "settings": { "collection": "womens-watch", "title": "ساعات نسائية" } },
-        "c12": { "type": "category", "settings": { "collection": "glasses", "title": "نظارات" } }
+        "c4": { "type": "category", "settings": { "collection": "cotton-shorts", "title": "شورت" } },
+        "c5": { "type": "category", "settings": { "collection": "قمصان-بحر", "title": "قميص" } },
+        "c6": { "type": "category", "settings": { "collection": "بنطال-جامبو", "title": "بنطال" } },
+        "c7": { "type": "category", "settings": { "collection": "set-t-shirt-short-أطقم", "title": "أطقم رجالية" } },
+        "c8": { "type": "category", "settings": { "collection": "أطقم-نسائية", "title": "أطقم نسائية" } },
+        "c9": { "type": "category", "settings": { "collection": "plus-size-hoodies", "title": "هودي مقاسات كبيرة" } },
+        "c10": { "type": "category", "settings": { "collection": "cap", "title": "كابات" } },
+        "c11": { "type": "category", "settings": { "collection": "تحطيم-الأسعار", "title": "تحطيم الأسعار" } },
+        "c12": { "type": "category", "settings": { "collection": "jacket-جاكيت", "title": "جاكيت" } },
+        "c13": { "type": "category", "settings": { "collection": "womens-watch", "title": "ساعات نسائية" } },
+        "c14": { "type": "category", "settings": { "collection": "mens-watch", "title": "ساعات رجالية" } },
+        "c15": { "type": "category", "settings": { "collection": "glasses", "title": "نظارات" } },
+        "c16": { "type": "category", "settings": { "collection": "لافوفو", "title": "لافوفو" } }
       },
-      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "c11", "c12"]
+      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "c11", "c12", "c13", "c14", "c15", "c16"]
     },
     "featured": {
       "type": "featured-products",
@@ -71,7 +75,7 @@
         "heading": "Up to 50% off — limited time",
         "text": "Our biggest markdowns of the season on perfumes, fashion and watches. When the timer ends, prices go back up.",
         "button_label": "Shop the sale",
-        "button_link": "shopify://collections/all",
+        "button_link": "shopify://collections/تحطيم-الأسعار",
         "end_date": "2026-07-15"
       }
     },
